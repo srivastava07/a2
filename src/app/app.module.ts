@@ -8,6 +8,7 @@ import { routes } from './app.routes';
 import { LoginComponent } from './login/login.component';
 import { LayoutModule } from './layout/layout.module';
 import { AuthGuard } from './guard/AuthGuard.guard';
+import { LocalStorageModule } from 'angular-2-local-storage';
 
 @NgModule({
   declarations: [
@@ -17,7 +18,11 @@ import { AuthGuard } from './guard/AuthGuard.guard';
   imports: [
     BrowserModule,
     LayoutModule,
-    RouterModule.forRoot(routes)
+    RouterModule.forRoot(routes),
+   LocalStorageModule.withConfig({
+        prefix: 'my-app',
+        storageType: 'localStorage'
+    })
   ],
   providers: [AuthGuard],
   bootstrap: [AppComponent]
