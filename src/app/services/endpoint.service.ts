@@ -15,7 +15,7 @@ export class EndPointService {
     }
  
     /**
-     * use to get the final url to consume the resource.
+     * Use to get the final url to consume the resource.
      *  @param 
      * @return {url}
      */
@@ -25,5 +25,20 @@ export class EndPointService {
         "login": "/login"
       };  
       return domainUrl + endPoint[key];
+    }
+
+
+
+    /**
+     * Build params for request
+     * @param {Object} obj
+     * @return {URLSearchParams}
+     */
+    buildParams = function( obj:Object ){
+      var params = new URLSearchParams();     
+      for(let key in obj)
+        params.set(key, obj[key]);
+
+      return params;
     }
 }

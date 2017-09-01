@@ -19,7 +19,7 @@ export class AuthenticationService {
             let param:any;
             param.email = email;
             param.password = password;
-        return this.http.post(this.endPoint.getUrl('login'), $.param(param))
+        return this.http.post(this.endPoint.getUrl('login'), this.endPoint.buildParams(param))
             .map(res => {
                 // If request fails, throw an Error that will be caught
                 if(res.status < 200 || res.status >= 300) {
@@ -37,7 +37,7 @@ export class AuthenticationService {
        
                    console.log("this executes second");
                    console.log(this.http);
-                   var http$ = this.http.post(his.endPoint.getUrl('getLoggedInUser'), $.param({}))
+                   var http = this.http.post(this.endPoint.getUrl('getLoggedInUser'), {})
                     .map(res => {
                      
                         // If request fails, throw an Error that will be caught
@@ -51,7 +51,7 @@ export class AuthenticationService {
                         }
                       }); 
 
-                  http$.subscribe(value => console.log(value));
+                  http.subscribe(value => console.log(value));
              }else{
                this.ClearCredentials();
                this.router.navigateByUrl('login');
@@ -94,7 +94,7 @@ export class AuthenticationService {
         }
         
     checkLogin = function(){
-            
+          console.log('checking login') ; 
             var token = this.getToken();
             if(token != null){
                  return true;
