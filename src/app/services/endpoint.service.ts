@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 
 
 class AppSettings {
-   public static API_ENDPOINT='http://127.0.0.1:6666/api';
+   public static API_ENDPOINT='http://atlasapi.lan/api/';
    public static API_VERSION='v1';
 }
 
@@ -20,9 +20,9 @@ export class EndPointService {
      * @return {url}
      */
     getUrl = function( key ){
-      var domainUrl = AppSettings.API_ENDPOINT+"/"+AppSettings.API_VERSION+'/';
+      var domainUrl = AppSettings.API_ENDPOINT;
       var endPoint = {
-        "login": "/login"
+        "login": "authenticate2"
       };  
       return domainUrl + endPoint[key];
     }
@@ -35,10 +35,11 @@ export class EndPointService {
      * @return {URLSearchParams}
      */
     buildParams = function( obj:Object ){
-      var params = new URLSearchParams();     
-      for(let key in obj)
-        params.set(key, obj[key]);
+     let myParams = new URLSearchParams(); 
+      for(let key in obj){        
+        myParams.set(key, obj[key]);
+      }
 
-      return params;
+      return myParams;
     }
 }

@@ -1,11 +1,14 @@
 import {Injectable} from '@angular/core';
-import {Http, Headers} from '@angular/http';
+import {Http, Headers,RequestOptions} from '@angular/http';
 import { LocalStorageService } from 'angular-2-local-storage';
+import {EndPointService} from "./endpoint.service"
 
 @Injectable()
 export class HttpClient {
-
-  constructor(private http: Http,private localStorageService: LocalStorageService,) {}
+  endPoint:EndPointService;
+  constructor(private http: Http,private localStorageService: LocalStorageService,endPoint:EndPointService) {
+    this.endPoint = endPoint;
+  }
 
   createAuthorizationHeader(headers: Headers) {
    // headers.append('Authorization', 'Basic ' +
@@ -23,17 +26,13 @@ export class HttpClient {
   get(url) {
     let headers = new Headers();
     this.createAuthorizationHeader(headers);
-    return this.http.get(url, {
-      headers: headers
-    });
+    return this.http.get(url, {headers: headers});
   }
 
   post(url, data) {
-    let headers = new Headers();
+    let headers = new Headers();    
     this.createAuthorizationHeader(headers);
-    return this.http.post(url, data, {
-      headers: headers
-    });
+    return this.http.post(url, data, new RequestOptions({ headers: headers, params:  this.endPoint.buildParams(data) }));
   }
 
    getToken = function(){

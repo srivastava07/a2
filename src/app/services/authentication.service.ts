@@ -12,15 +12,13 @@ export class AuthenticationService {
     authUser:any;
     endPoint:EndPointService;
     constructor(private http:HttpClient, private localStorageService: LocalStorageService,private router: Router,endPoint:EndPointService) {
-     
+     this.endPoint = endPoint;
     }
  
-    login(email: string, password: string) {
-            let param:any;
-            param.email = email;
-            param.password = password;
-        return this.http.post(this.endPoint.getUrl('login'), this.endPoint.buildParams(param))
+    login(param:any) {           
+        return this.http.post(this.endPoint.getUrl('login'),param)
             .map(res => {
+              console.log(res);
                 // If request fails, throw an Error that will be caught
                 if(res.status < 200 || res.status >= 300) {
                   throw new Error('This request has failed ' + res.status);

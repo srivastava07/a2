@@ -1,3 +1,42 @@
-<p>
-  login works!
-</p>
+<div class="container">
+	<h2>Login</h2>  
+
+	<div class="row">
+		<div class="col-sm-6 col-sm-offset-3">
+			<div class="jumbotron">   
+				<form [formGroup]="loginForm" (ngSubmit)="login(loginForm.value)">
+					<div class="form-group" [ngClass]="{'has-error':!loginForm.controls['userName'].valid && loginForm.controls['userName'].touched}">
+						<label>Username:</label>
+						<input class="form-control" type="text" placeholder="username..." [formControl]="loginForm.controls['userName']">
+						<!-- The hasError method will tell us if a particular error exists -->
+						<div *ngIf="loginForm.controls['userName'].hasError('required') && loginForm.controls['userName'].touched" class="alert alert-danger">
+							Username is required.
+						</div>
+					</div>
+					<div class="form-group" [ngClass]="{'has-error':!loginForm.controls['passWord'].valid && loginForm.controls['passWord'].touched}">
+						<label>Password</label>
+						<input class="form-control" type="text" placeholder="password..." [formControl]="loginForm.controls['passWord']">
+						<!-- The hasError method can work with the built in validators but custom validators as well -->
+						<div *ngIf="loginForm.controls['passWord'].hasError('required') && loginForm.controls['passWord'].touched" class="alert alert-danger">
+							Password is required.
+						</div>
+						<div *ngIf="loginForm.controls['passWord'].hasError('minlength') && loginForm.controls['passWord'].touched" class="alert alert-danger">
+							Password must be at least 5 characters long.
+						</div>
+						<div *ngIf="loginForm.controls['passWord'].hasError('maxlength') && loginForm.controls['passWord'].touched" class="alert alert-danger">
+							Password cannot exceed 10 characters.
+						</div>
+					</div>  
+					<div class="form-group">
+						<label class="checkbox-inline">
+							<input type="checkbox" value="true" name="rememberMe" [formControl]="loginForm.controls['rememberMe']"> Remember Me
+						</label> 
+					</div>
+				<div class="form-group">
+					<button type="submit" class="btn btn-primary" [disabled]="!loginForm.valid">Submit</button>
+				</div>
+			</form>
+		</div>
+	</div>
+</div>
+</div>

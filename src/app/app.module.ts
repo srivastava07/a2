@@ -5,6 +5,7 @@ import { AppComponent } from './app.component';
 import { RouterModule } from '@angular/router';
 
 import { routes } from './app.routes';
+import { FormsModule, Validators,ReactiveFormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 
 import { LoginComponent } from './login/login.component';
@@ -22,6 +23,8 @@ import { LocalStorageModule } from 'angular-2-local-storage';
   ],
   imports: [
     BrowserModule,
+    FormsModule,
+    ReactiveFormsModule,
     LayoutModule,
     RouterModule.forRoot(routes),
    LocalStorageModule.withConfig({
