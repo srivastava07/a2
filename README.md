@@ -1,1 +1,1 @@
-# a2
+# Standard Template for admin in Angular 2/4
